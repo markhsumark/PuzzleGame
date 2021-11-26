@@ -14,8 +14,8 @@ struct HomeTool: View {
     @Binding var a_y: CGFloat
     @Binding var game_y: CGFloat
     @State private var selectedIndex: Int = 0
+    @State private var sliderValue: CGFloat  = 0
     let wordList = ["IT", "IS", "NOT", "A", "GAME"]
-//    let yList = [$it_y, $is_y, not_y, a_y, game_y.self]
     var body: some View {
             Picker(selection: $selectedIndex) {
                 ForEach(0 ..< 5){i in
@@ -25,12 +25,40 @@ struct HomeTool: View {
                 Text("選擇角色")
             }
             .pickerStyle(.segmented)
-            
-            Slider(value: $it_y, in: -150...150)
-            Slider(value: $is_y, in: -150...150)
-            Slider(value: $not_y, in: -150...150)
-            Slider(value: $a_y, in: -150...150)
-            Slider(value: $game_y, in: -150...150)
+            .onChange(of: selectedIndex) { newValue in
+                switch newValue {
+                case 0:
+                    sliderValue = it_y
+                case 1:
+                    sliderValue = is_y
+                case 2:
+                    sliderValue = not_y
+                case 3:
+                    sliderValue = a_y
+                case 4:
+                    sliderValue = game_y
+                default:
+                    break
+                }
+            }
+            Slider(value: $sliderValue, in: -150...150)
+            .onChange(of:sliderValue) { newValue in
+                switch selectedIndex {
+                case 0:
+                    it_y = newValue
+                case 1:
+                    is_y = newValue
+                case 2:
+                    not_y = newValue
+                case 3:
+                    a_y = newValue
+                case 4:
+                    game_y = newValue
+                default:
+                    break
+                }
+            }
+
         
         //想做的
 //        Slider(value: ylist[selectedIndex], in: -300...300)

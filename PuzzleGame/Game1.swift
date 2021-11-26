@@ -10,7 +10,6 @@ import Foundation
 //35
 struct Game1: View {
     @State private var colorState: Color = Color.red
-    @State private var buttonText = "NOT"
     @State private var isCorrect: Bool = false
     @State private var it_y: CGFloat = Double.random(in: -150..<150)
     @State private var is_y: CGFloat = Double.random(in: -150..<150)
@@ -37,7 +36,7 @@ struct Game1: View {
                             .modifier(TextViewModifier(colorState: colorState, index_y: it_y))
                         Text("IS")
                             .modifier(TextViewModifier(colorState: colorState, index_y: is_y))
-                        Text(buttonText)
+                        Text("NOT")
                             .modifier(TextViewModifier(colorState: colorState, index_y: not_y))
                         Text("A")
                             .modifier(TextViewModifier(colorState: colorState, index_y: a_y))
@@ -64,6 +63,7 @@ struct Game1: View {
                     .foregroundColor(.black)
                     .font(.system(size: 30))
             }
+            .padding()
         }
         .onChange(of: it_y){ newValue in
             check(it_y: it_y, is_y :is_y, not_y : not_y, a_y :a_y, game_y :game_y)
@@ -83,12 +83,10 @@ struct Game1: View {
     }
     func check(it_y: CGFloat, is_y :CGFloat, not_y: CGFloat, a_y:CGFloat, game_y:CGFloat) -> (){
         if it_y > -25.0 , it_y < 25.0 , is_y > -25.0 , is_y < 25.0 , a_y > -25.0 , a_y < 25.0 , game_y > -25.0 , game_y < 25.0 , not_y > 35.0 || not_y < -35.0 {
-            buttonText = "GAME1"
             colorState = Color.green
             isCorrect = true
         }
         else{
-            buttonText = "NOT"
             colorState = Color.red
             isCorrect = false
         }
