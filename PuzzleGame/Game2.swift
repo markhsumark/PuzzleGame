@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct Game2: View {
-    @Binding var showGame1: Bool
+    @Binding var showGame2: Bool
+    @Binding var pwd : String
+    @State private var answer : String = ""
     var body: some View {
         VStack{
             
-            
+            TextField("", text: $answer , prompt: Text("password"))
             Button("Back"){
-                showGame1 = false
+                if answer == pwd{
+                    showGame2 = false
+                }
             }
         }
         DisclosureGroup{

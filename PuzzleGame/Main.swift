@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct Main: View {
+    @State private var pwd = ""
+    @State private var img_id : Int = 0
     var body: some View {
         TabView{
-            Game1()
+            Game1(pwd: $pwd)
                 .tabItem {
                     Label("Adventure", systemImage: "map")
                 }
-            Setting()
+            Player(img_index: $img_id)
+                .tabItem{
+                    Label("Player Preference", systemImage: "person")
+                }
+            Setting(pwd: $pwd)
                 .tabItem {
-                    Label("Adventure", systemImage: "map")
+                    Label("Setting", systemImage: "gear")
                 }
         }
     }

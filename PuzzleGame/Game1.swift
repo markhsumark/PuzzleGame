@@ -16,19 +16,21 @@ struct Game1: View {
     @State private var not_y: CGFloat = Double.random(in: -20..<20)
     @State private var a_y: CGFloat = Double.random(in: -150..<150)
     @State private var game_y: CGFloat = Double.random(in: -150..<150)
-    @State private var showGame1 = false
+    @State private var showGame2 = false
     @State private var showTool = false
     @State private var showIn = false
+    @Binding var pwd : String
     var body: some View {
         
         VStack {
-            Text("You have to know, it is 'not' a Game")
+            Label("hint:You have to know, it is 'not' a Game", systemImage: "questionmark.circle")
                 .foregroundColor(.gray)
+                .padding(10)
             Spacer()
             HStack{
                 Button{
                     if isCorrect {
-                        showGame1 = true
+                        showGame2 = true
                     }
                 }label:{
                     if showIn{
@@ -44,8 +46,8 @@ struct Game1: View {
                             .modifier(TextViewModifier(colorState: colorState, index_y: game_y))
                     }
                 }
-                .fullScreenCover(isPresented: $showGame1){
-                    Game2(showGame1: $showGame1)
+                .fullScreenCover(isPresented: $showGame2){
+                    Game2(showGame2: $showGame2, pwd : $pwd)
                 }
             }
             .padding(10)
@@ -57,7 +59,7 @@ struct Game1: View {
             }
             Spacer()
             DisclosureGroup{
-                HomeTool(it_y: $it_y, is_y: $is_y, not_y: $not_y, a_y: $a_y, game_y: $game_y)
+                Game1Tool(it_y: $it_y, is_y: $is_y, not_y: $not_y, a_y: $a_y, game_y: $game_y)
             }label:{
                 Label("Tool", systemImage: "hammer.circle")
                     .foregroundColor(.black)
@@ -82,7 +84,7 @@ struct Game1: View {
         }
     }
     func check(it_y: CGFloat, is_y :CGFloat, not_y: CGFloat, a_y:CGFloat, game_y:CGFloat) -> (){
-        if it_y > -25.0 , it_y < 25.0 , is_y > -25.0 , is_y < 25.0 , a_y > -25.0 , a_y < 25.0 , game_y > -25.0 , game_y < 25.0 , not_y > 35.0 || not_y < -35.0 {
+        if it_y > -15.0 , it_y < 15.0 , is_y > -15.0 , is_y < 15.0 , a_y > -15.0 , a_y < 15.0 , game_y > -15.0 , game_y < 15.0 , not_y > 35.0 || not_y < -35.0 {
             colorState = Color.green
             isCorrect = true
         }
@@ -93,11 +95,11 @@ struct Game1: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Game1()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Game1()
+//    }
+//}
 
 struct TextViewModifier: ViewModifier {
     var colorState:Color

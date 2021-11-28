@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct Setting: View {
-    @State private var name = ""
-    @State private var pwd = ""
+    @Binding var pwd : String
     @State private var birthday: Date = Date()
     var body: some View {
         VStack{
-//            Image()
-            TextField("Your name", text: $name , prompt: Text("王小明"))
-                .padding()
-            TextField("Your favorate number", text: $pwd , prompt: Text("00000000"))
+            Label("Your name(English):", systemImage: "key")
+            TextField("Your name", text: $pwd , prompt: Text("XXX"))
                 .padding()
             DatePicker("Your birthday", selection: $birthday)
                 .padding()
+                .datePickerStyle(.wheel)
         }
     }
 }
 
-struct Setting_Previews: PreviewProvider {
-    static var previews: some View {
-        Setting()
-    }
-}
+//struct Setting_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Setting()
+//    }
+//}
+

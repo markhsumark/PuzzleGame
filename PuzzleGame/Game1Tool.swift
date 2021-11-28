@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeTool: View {
+struct Game1Tool: View {
     @Binding var it_y: CGFloat
     @Binding var is_y: CGFloat
     @Binding var not_y: CGFloat
@@ -42,6 +42,9 @@ struct HomeTool: View {
                 }
             }
             Slider(value: $sliderValue, in: -150...150)
+            .onAppear{
+                sliderValue = it_y
+            }
             .onChange(of:sliderValue) { newValue in
                 switch selectedIndex {
                 case 0:
@@ -58,11 +61,6 @@ struct HomeTool: View {
                     break
                 }
             }
-
-        
-        //想做的
-//        Slider(value: ylist[selectedIndex], in: -300...300)
-        
     }
 }
 
