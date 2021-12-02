@@ -11,15 +11,24 @@ struct SettingView: View {
     @Binding var pwd : String
     @Binding var isPwd : Bool
     @State private var birthday: Date = Date()
+    @FocusState private var focusField : Bool
     var body: some View {
         ZStack{
             List{
                 Label("", systemImage: "key")
                     .contextMenu{
-                        Toggle("Put into you backbag", isOn: $isPwd)
+                        Toggle("Set password", isOn: $isPwd)
                     }
-                TextField("", text: $pwd , prompt: Text("your password(number)"))
-                    .keyboardType(.numberPad)
+                HStack{
+                    TextField("", text: $pwd , prompt: Text("your password(number)"))
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.numberPad)
+                        .focused($focusField)
+                    Spacer()
+                    Button("完成"){
+                        focusField = false
+                    }
+                }
             }
         }
     }

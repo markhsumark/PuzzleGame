@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct PlayerView: View {
+    enum Field {
+        case Name
+        case Intro
+    }
     @Binding var playerInfo : PlayerInfo
     @State private var imgName = "peter1"
     @State private var photoInfo: Img_modifier = Img_modifier()
@@ -19,6 +23,8 @@ struct PlayerView: View {
     @State private var age : Int = 18
     @State private var inputColor : Color = Color.blue
     @State private var intro : String = "我是puzzlegame的玩家"
+    @FocusState private var focusedField : Field?
+    @FocusState private var focusedEditor : Bool
     var body: some View {
         List{
             TabView(selection: $img_index){
@@ -48,9 +54,20 @@ struct PlayerView: View {
                 Text("Edit Picture:")
             }
             TextField("姓名", text: $name, prompt: Text("姓名"))
+                .textFieldStyle(.roundedBorder)
+                .focused($focusedField, equals: .Name)
+                .textContentType(.givenName)
+                .submitLabel(.done)
             Stepper("年齡： \(age) 歲", value: $age, in: 10...80)
             DatePicker("生日：", selection: $birthday,displayedComponents: .date)
+            Button{
+                focusedEditor = false
+            }label:{
+                Text("收起自介鍵盤")
+                    .opacity(0.5)
+            }
             TextEditor(text: $intro)
+                .focused($focusedEditor)
         }
         .onDisappear {
             if img_index == 1{
