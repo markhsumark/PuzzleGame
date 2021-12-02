@@ -17,31 +17,31 @@ struct Game1Tool: View {
     @State private var sliderValue: CGFloat  = 0
     let wordList = ["IT", "IS", "NOT", "A", "GAME"]
     var body: some View {
-            Picker(selection: $selectedIndex) {
-                ForEach(0 ..< 5){i in
-                    Text(wordList[i])
-                }
-            } label: {
-                Text("選擇角色")
+        Picker(selection: $selectedIndex) {
+            ForEach(0 ..< 5){i in
+                Text(wordList[i])
             }
-            .pickerStyle(.segmented)
-            .onChange(of: selectedIndex) { newValue in
-                switch newValue {
-                case 0:
-                    sliderValue = it_y
-                case 1:
-                    sliderValue = is_y
-                case 2:
-                    sliderValue = not_y
-                case 3:
-                    sliderValue = a_y
-                case 4:
-                    sliderValue = game_y
-                default:
-                    break
-                }
+        } label:{
+            Text("")
+        }
+        .pickerStyle(.segmented)
+        .onChange(of: selectedIndex) { newValue in
+            switch newValue {
+            case 0:
+                sliderValue = it_y
+            case 1:
+                sliderValue = is_y
+            case 2:
+                sliderValue = not_y
+            case 3:
+                sliderValue = a_y
+            case 4:
+                sliderValue = game_y
+            default:
+                break
             }
-            Slider(value: $sliderValue, in: -150...150)
+        }
+        Slider(value: $sliderValue, in: -150...150)
             .onAppear{
                 sliderValue = it_y
             }

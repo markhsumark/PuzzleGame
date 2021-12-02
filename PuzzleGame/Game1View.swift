@@ -8,7 +8,7 @@
 import SwiftUI
 import Foundation
 //35
-struct Game1: View {
+struct Game1View: View {
     @State private var colorState: Color = Color.red
     @State private var isCorrect: Bool = false
     @State private var it_y: CGFloat = Double.random(in: -150..<150)
@@ -47,7 +47,7 @@ struct Game1: View {
                     }
                 }
                 .fullScreenCover(isPresented: $showGame2){
-                    Game2(showGame2: $showGame2, pwd : $pwd)
+                    Game2View(showGame2: $showGame2, pwd : $pwd)
                 }
             }
             .padding(10)
@@ -112,3 +112,4 @@ struct TextViewModifier: ViewModifier {
             .transition(.slide)
     }
 }
+

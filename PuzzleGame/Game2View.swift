@@ -7,13 +7,18 @@
 
 import SwiftUI
 
-struct Game2: View {
+struct Game2View: View {
     @Binding var showGame2: Bool
     @Binding var pwd : String
     @State private var answer : String = ""
     var body: some View {
         VStack{
-            
+            Image("lootbox")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 200)
+                .background(.white)
+                .padding()
             TextField("", text: $answer , prompt: Text("password"))
             Button("Back"){
                 if answer == pwd{
