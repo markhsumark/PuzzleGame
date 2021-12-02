@@ -26,7 +26,7 @@ struct PlayerView: View {
     @FocusState private var focusedField : Field?
     @FocusState private var focusedEditor : Bool
     var body: some View {
-        List{
+        Form{
             TabView(selection: $img_index){
                 Image("peter1")
                     .resizable()
@@ -47,6 +47,7 @@ struct PlayerView: View {
             .frame(height : 400)
             .padding()
             DisclosureGroup{
+                
                 SliderView(controll_value: $width, sliderName: "size of picture", max_value: CGFloat(50.0), min_value: CGFloat(200.0))
                 SliderView(controll_value: $borderWidth, sliderName: "width of border", max_value: CGFloat(1.0), min_value: CGFloat(10.0))
                 ColorPicker("Border color", selection: $inputColor)
@@ -58,6 +59,7 @@ struct PlayerView: View {
                 .focused($focusedField, equals: .Name)
                 .textContentType(.givenName)
                 .submitLabel(.done)
+            
             Stepper("年齡： \(age) 歲", value: $age, in: 10...80)
             DatePicker("生日：", selection: $birthday,displayedComponents: .date)
             Button{
