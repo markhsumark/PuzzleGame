@@ -11,6 +11,7 @@ struct Img_modifier{
     var img_name : String = "peter1"
     var width : CGFloat = 150.0
     var color = Color.blue
+    var borderWidth : CGFloat = 5.0
 //    var opacity : Float
 }
 

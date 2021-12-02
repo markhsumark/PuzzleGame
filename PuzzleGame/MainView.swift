@@ -13,7 +13,7 @@ struct MainView: View {
     @State private var playerInfo : PlayerInfo = PlayerInfo()
     var body: some View {
         TabView{
-            Game1View(pwd: $pwd)
+            Game1View(pwd: $pwd, playerInfo: $playerInfo,  isPwd : $isPwd)
                 .tabItem {
                     Label("Adventure", systemImage: "map")
                 }

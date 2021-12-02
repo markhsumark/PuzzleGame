@@ -19,7 +19,10 @@ struct Game1View: View {
     @State private var showGame2 = false
     @State private var showTool = false
     @State private var showIn = false
+    @State private var isAlert = false
     @Binding var pwd : String
+    @Binding var playerInfo : PlayerInfo
+    @Binding var isPwd : Bool
     var body: some View {
         
         VStack {
@@ -31,6 +34,10 @@ struct Game1View: View {
                 Button{
                     if isCorrect {
                         showGame2 = true
+                        print(pwd)
+                    }
+                    else{
+                        isAlert = true
                     }
                 }label:{
                     if showIn{
@@ -46,9 +53,11 @@ struct Game1View: View {
                             .modifier(TextViewModifier(colorState: colorState, index_y: game_y))
                     }
                 }
-                .fullScreenCover(isPresented: $showGame2){
-                    Game2View(showGame2: $showGame2, pwd : $pwd)
-                }
+                .alert("hint:Absolutly,It is a Game.", isPresented: $isAlert, actions: {
+                    Button("Back"){
+                        isAlert = false
+                    }
+                })
             }
             .padding(10)
             .border(colorState, width: 5)
@@ -81,6 +90,9 @@ struct Game1View: View {
         }
         .onChange(of: game_y) { newValue in
             check(it_y: it_y, is_y :is_y, not_y : not_y, a_y :a_y, game_y :game_y)
+        }
+        .fullScreenCover(isPresented: $showGame2){
+            Game2View(showGame2 : $showGame2, pwd : $pwd, playerInfo : $playerInfo, isPwd : $isPwd)
         }
     }
     func check(it_y: CGFloat, is_y :CGFloat, not_y: CGFloat, a_y:CGFloat, game_y:CGFloat) -> (){
